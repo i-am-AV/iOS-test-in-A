@@ -10,6 +10,9 @@
 		FD98723A2A9A7B1500DC8F2B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD9872392A9A7B1500DC8F2B /* AppDelegate.swift */; };
 		FD9872432A9A7B1600DC8F2B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FD9872422A9A7B1600DC8F2B /* Assets.xcassets */; };
 		FD9872462A9A7B1600DC8F2B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FD9872442A9A7B1600DC8F2B /* LaunchScreen.storyboard */; };
+		FD9872572A9B5E0600DC8F2B /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD9872562A9B5E0600DC8F2B /* NetworkManager.swift */; };
+		FD98725E2A9BEFBA00DC8F2B /* NetworkManagerModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD98725D2A9BEFBA00DC8F2B /* NetworkManagerModels.swift */; };
+		FD9872602A9CB4D600DC8F2B /* NetworkManagerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD98725F2A9CB4D600DC8F2B /* NetworkManagerProtocol.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -18,6 +21,9 @@
 		FD9872422A9A7B1600DC8F2B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		FD9872452A9A7B1600DC8F2B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		FD9872472A9A7B1600DC8F2B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		FD9872562A9B5E0600DC8F2B /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
+		FD98725D2A9BEFBA00DC8F2B /* NetworkManagerModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManagerModels.swift; sourceTree = "<group>"; };
+		FD98725F2A9CB4D600DC8F2B /* NetworkManagerProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManagerProtocol.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -93,6 +99,7 @@
 		FD9872542A9B54BD00DC8F2B /* Managers */ = {
 			isa = PBXGroup;
 			children = (
+				FD98725C2A9BD67100DC8F2B /* NetworkManager */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
@@ -104,6 +111,16 @@
 				FD9872532A9B549300DC8F2B /* ProductDetailsScene */,
 			);
 			path = Scenes;
+			sourceTree = "<group>";
+		};
+		FD98725C2A9BD67100DC8F2B /* NetworkManager */ = {
+			isa = PBXGroup;
+			children = (
+				FD9872562A9B5E0600DC8F2B /* NetworkManager.swift */,
+				FD98725D2A9BEFBA00DC8F2B /* NetworkManagerModels.swift */,
+				FD98725F2A9CB4D600DC8F2B /* NetworkManagerProtocol.swift */,
+			);
+			path = NetworkManager;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -198,6 +215,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FD98725E2A9BEFBA00DC8F2B /* NetworkManagerModels.swift in Sources */,
+				FD9872572A9B5E0600DC8F2B /* NetworkManager.swift in Sources */,
+				FD9872602A9CB4D600DC8F2B /* NetworkManagerProtocol.swift in Sources */,
 				FD98723A2A9A7B1500DC8F2B /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
