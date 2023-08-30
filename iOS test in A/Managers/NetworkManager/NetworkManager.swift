@@ -27,6 +27,10 @@ final class NetworkManager: NetworkManagerProtocol {
             static let clientError: ClosedRange<Int> = 400...499
             static let serverError: ClosedRange<Int> = 500...599
         }
+        enum Timeouts {
+            static let intervalForRequest: TimeInterval = 30
+            static let intervalForResource: TimeInterval = 60
+        }
     }
 
     private enum ResponseResult {
@@ -64,7 +68,11 @@ final class NetworkManager: NetworkManagerProtocol {
         getUrlRequest(by: urlString) { result in
             switch result {
             case .success(let request):
-                URLSession.shared.dataTask(with: request) { data, response, error in
+                let configuration = URLSessionConfiguration.default
+                configuration.timeoutIntervalForRequest = Constants.Timeouts.intervalForRequest
+                configuration.timeoutIntervalForResource = Constants.Timeouts.intervalForResource
+                let session = URLSession(configuration: configuration)
+                session.dataTask(with: request) { data, response, error in
                     if let error: Error = error { completion(.failure(error)) }
                     guard let data: Data = data else {
                         completion(.failure(Errors.noData))
@@ -97,7 +105,11 @@ final class NetworkManager: NetworkManagerProtocol {
         getUrlRequest(by: urlString) { result in
             switch result {
             case .success(let request):
-                URLSession.shared.dataTask(with: request) { data, response, error in
+                let configuration = URLSessionConfiguration.default
+                configuration.timeoutIntervalForRequest = Constants.Timeouts.intervalForRequest
+                configuration.timeoutIntervalForResource = Constants.Timeouts.intervalForResource
+                let session = URLSession(configuration: configuration)
+                session.dataTask(with: request) { data, response, error in
                     if let error: Error = error { completion(.failure(error)) }
                     guard let data: Data = data else {
                         completion(.failure(Errors.noData))

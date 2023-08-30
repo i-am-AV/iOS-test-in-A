@@ -15,39 +15,10 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
         _ application: UIApplication,
         didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?
     ) -> Bool {
+        let rootViewController: UIViewController = AdvertisementsListAssembly.build()
         window = UIWindow(frame: UIScreen.main.bounds)
-        window?.rootViewController = UINavigationController(rootViewController: UIViewController())
+        window?.rootViewController = UINavigationController(rootViewController: rootViewController)
         window?.makeKeyAndVisible()
-
-        #warning("Тестирование NetworkManager. Будет удалено")
-        let networkManager: NetworkManagerProtocol = NetworkManager()
-        networkManager.fetchAdvertisements { result in
-            switch result {
-            case .success(let list):
-                print(list)
-                print("\n\n\n")
-            case .failure(let error):
-                print(error)
-            }
-        }
-        networkManager.fetchDetailAdvertisement(by: "1") { result in
-            switch result {
-            case .success(let item):
-                print(item)
-                print("\n\n\n")
-            case .failure(let error):
-                print(error)
-            }
-        }
-        networkManager.fetchImage(by: "https://www.avito.st/s/interns-ios/images/1.png") { result in
-            switch result {
-            case .success(let item):
-                print(item)
-                print(UIImage(data: item))
-            case .failure(let error):
-                print(error)
-            }
-        }
 
         return true
     }

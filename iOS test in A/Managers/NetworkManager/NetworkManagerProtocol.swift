@@ -13,8 +13,8 @@ protocol NetworkManagerProtocol: AnyObject {
 
     /// Метод для получения списка объявлений
     func fetchAdvertisements(completion: @escaping СompletionType)
-    /// Метод для получения детальной информации о конкретном объявлении
+    /// Метод для получения детальной информации о конкретном объявлении по **id**
     func fetchDetailAdvertisement(by id: String, completion: @escaping DetailСompletionType)
-    /// Метод для получения картинки объявления
+    /// Метод для получения картинки объявления по **urlString**
     func fetchImage(by urlString: String, completion: @escaping (Result<Data, Error>) -> Void)
 }
