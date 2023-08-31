@@ -48,6 +48,34 @@ final class AdvertisementsListInteractor: AdvertisementsListBusinessLogic, Adver
         }
     }
 
+    func requestLoadVisibleImages(_ request: AdvertisementsListScene.LoadVisibleImages.Request) {
+        let visibleItems = self.advertisementsList.prefix(request.lastIndex)
+        let group = DispatchGroup()
+        for item in visibleItems {
+            group.enter()
+            self.networkManager.fetchImage(by: imagesUrlStringsDict[item.id]!) { [weak self] result in
+                guard let self = self else { return }
+                switch result {
+                case .success(let data):
+                    guard
+                        let index = self.advertisementsList.firstIndex(where: { $0.id == item.id }),
+                        !self.advertisementsList.isEmpty
+                    else { return }
+                    self.advertisementsList[index].imageData = data
+                    group.leave()
+                case .failure(let error):
+                    presentErrorAlert(with: error.localizedDescription)
+                }
+            }
+        }
+        group.notify(queue: .main) {
+            self.presenter.presentLoadVisibleImages(
+                AdvertisementsListScene.LoadVisibleImages.Response(
+                    model: self.advertisementsList
+                )
+            )
+        }
+    }
     func requestImages(_ request: AdvertisementsListScene.Images.Request) {
         let group = DispatchGroup()
         for (id, urlString) in imagesUrlStringsDict {

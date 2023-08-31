@@ -19,7 +19,6 @@ final class NetworkManager: NetworkManagerProtocol {
     private enum Constants {
         enum UrlStrings {
             static let advertisements: String = "https://www.avito.st/s/interns-ios/main-page.json"
-            static let advertisementDetail: String = "https://www.avito.st/s/interns-ios/details/{itemId}.json"
         }
         enum Statuses {
             static let success: ClosedRange<Int> = 200...299

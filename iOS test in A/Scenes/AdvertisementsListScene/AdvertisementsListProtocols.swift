@@ -13,12 +13,14 @@ protocol AdvertisementsListDataStore {
 
 protocol AdvertisementsListBusinessLogic {
     func requestInitForm(_ request: AdvertisementsListScene.InitForm.Request)
+    func requestLoadVisibleImages(_ request: AdvertisementsListScene.LoadVisibleImages.Request)
     func requestImages(_ request: AdvertisementsListScene.Images.Request)
     func requestSelectedAdvertisement(_ request: AdvertisementsListScene.SelectedAdvertisement.Request)
 }
 
 protocol AdvertisementsListPresentationLogic {
     func presentInitForm(_ response: AdvertisementsListScene.InitForm.Response)
+    func presentLoadVisibleImages(_ response: AdvertisementsListScene.LoadVisibleImages.Response)
     func presentImages(_ response: AdvertisementsListScene.Images.Response)
     func presentSelectedAdvertisement(_ response: AdvertisementsListScene.SelectedAdvertisement.Response)
     func presentErrorAlert(_ response: AdvertisementsListScene.ErrorAlert.Response)
@@ -26,6 +28,7 @@ protocol AdvertisementsListPresentationLogic {
 
 protocol AdvertisementsListDisplayLogic: AnyObject {
     func displayInitForm(_ viewModel: AdvertisementsListScene.InitForm.ViewModel)
+    func displayLoadVisibleImages(_ viewModel: AdvertisementsListScene.LoadVisibleImages.ViewModel)
     func displayImages(_ viewModel: AdvertisementsListScene.Images.ViewModel)
     func displaySelectedAdvertisement(_ viewModel: AdvertisementsListScene.SelectedAdvertisement.ViewModel)
     func displayErrorAlert(_ viewModel: AdvertisementsListScene.ErrorAlert.ViewModel)

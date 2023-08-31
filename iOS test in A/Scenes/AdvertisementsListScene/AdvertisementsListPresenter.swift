@@ -29,6 +29,9 @@ final class AdvertisementsListPresenter: AdvertisementsListPresentationLogic {
         )
     }
 
+    func presentLoadVisibleImages(_ response: AdvertisementsListScene.LoadVisibleImages.Response) {
+        view?.displayLoadVisibleImages(AdvertisementsListScene.LoadVisibleImages.ViewModel(model: response.model))
+    }
     func presentImages(_ response: AdvertisementsListScene.Images.Response) {
         view?.displayImages(AdvertisementsListScene.Images.ViewModel(model: response.model))
     }

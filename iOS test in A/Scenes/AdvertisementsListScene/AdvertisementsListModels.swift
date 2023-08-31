@@ -40,6 +40,18 @@ enum AdvertisementsListScene {
         }
     }
 
+    enum LoadVisibleImages {
+        struct Request {
+            let lastIndex: Int
+        }
+        struct Response {
+            let model: [Model]
+        }
+        struct ViewModel {
+            let model: [Model]
+        }
+    }
+
     enum Images {
         struct Request {}
         struct Response {

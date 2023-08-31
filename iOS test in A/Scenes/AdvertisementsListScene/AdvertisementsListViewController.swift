@@ -30,6 +30,7 @@ final class AdvertisementsListViewController: UIViewController,
     private let router: AdvertisementsListRoutingLogic
 
     private var needsHideIndicator: Bool = false
+    private var needsStartFetching: Bool = false
 
     // MARK: - Private UI properties
     private lazy var collectionViewLayout: UICollectionViewCompositionalLayout = {
@@ -117,10 +118,24 @@ final class AdvertisementsListViewController: UIViewController,
     // MARK: - AdvertisementsListDisplayLogic
     func displayInitForm(_ viewModel: AdvertisementsListScene.InitForm.ViewModel) {
         collectionView.backgroundView = nil
+        needsStartFetching = false
         var snapshot: Snapshot = Snapshot()
         snapshot.appendSections([.gridSection])
         snapshot.appendItems(viewModel.advertisementsList, toSection: .gridSection)
         dataSource.apply(snapshot, animatingDifferences: false) { [weak self] in
+            guard let count: Int = self?.collectionView.visibleCells.count else { return }
+            self?.interactor.requestLoadVisibleImages(
+                AdvertisementsListScene.LoadVisibleImages.Request(lastIndex: count)
+            )
+        }
+    }
+
+    func displayLoadVisibleImages(_ viewModel: AdvertisementsListScene.LoadVisibleImages.ViewModel) {
+        var snapshot: Snapshot = Snapshot()
+        snapshot.appendSections([.gridSection])
+        snapshot.appendItems(viewModel.model, toSection: .gridSection)
+        dataSource.apply(snapshot, animatingDifferences: true) { [weak self] in
+            self?.collectionView.reloadData()
             self?.interactor.requestImages(AdvertisementsListScene.Images.Request())
         }
     }
@@ -140,6 +155,7 @@ final class AdvertisementsListViewController: UIViewController,
 
     func displayErrorAlert(_ viewModel: AdvertisementsListScene.ErrorAlert.ViewModel) {
         needsHideIndicator = true
+        needsStartFetching = true
         collectionView.reloadData()
         createErrorAlert(with: viewModel.text)
     }
@@ -161,6 +177,7 @@ final class AdvertisementsListViewController: UIViewController,
     @objc private func refreshAction(_ sender: UIRefreshControl) {
         sender.endRefreshing()
         needsHideIndicator = false
+        guard needsStartFetching else { return }
         DispatchQueue.main.asyncAfter(deadline: .now() + Constants.delay) {
             self.interactor.requestInitForm(AdvertisementsListScene.InitForm.Request())
         }
